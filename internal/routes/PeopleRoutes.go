@@ -103,4 +103,23 @@ func SetupPeopleRoutes(app *fiber.App) {
 			return controllers.DeletePastor(c)
 		})
 	})
+
+	users.Route("/admins", func(api fiber.Router) {
+
+		api.Get("/:id", func(c *fiber.Ctx) error {
+			return controllers.GetAdmin(c)
+		})
+
+		api.Post("/new", func(c *fiber.Ctx) error {
+			return controllers.CreateAdmin(c)
+		})
+
+		api.Patch("/:id", func(c *fiber.Ctx) error {
+			return controllers.UpdateAdmin(c)
+		})
+
+		api.Delete("/:id", func(c *fiber.Ctx) error {
+			return controllers.DeleteAdmin(c)
+		})
+	})
 }

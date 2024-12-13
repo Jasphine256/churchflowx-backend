@@ -1,47 +1,77 @@
 package services
 
-import "churchflowx/internal/objects"
+import (
+	"churchflowx/internal/database"
+	"churchflowx/internal/models"
+	"churchflowx/internal/objects"
+)
+
+var db = database.InitialiseDB()
 
 // ######################## FUNDS SERVICES ###########################
 
-func AddFundToDb(taks *objects.Fund) {
-
+func AddFundToDb(user_id int, fund objects.Fund) bool {
+	new_fund := models.Fund{
+		UserId: user_id,
+		Name:   fund.Name,
+		Reason: fund.Reason,
+		Amount: fund.Amount,
+		Date:   fund.Date,
+	}
+	result := db.Create(&new_fund)
+	return result.Error == nil
 }
 
-func GetFundFromDb(taks *objects.Task) {
+func GetFundFromDb(fund *objects.Task) (bool, string) {
 
+	return true, "success"
 }
 
-func GetFundsFromDb(taks *objects.Fund) {
+func GetFundsFromDb(fund *objects.Fund) (bool, string) {
 
+	return true, "success"
 }
 
-func UpdateFundInDb(taks *objects.Fund) {
+func UpdateFundInDb(fund *objects.Fund) (bool, string) {
 
+	return true, "success"
 }
 
-func DeleteFundFromDb(taks *objects.Fund) {
+func DeleteFundFromDb(fund *objects.Fund) (bool, string) {
 
+	return true, "success"
 }
 
 // ######################## PAYMENTS SERVICES ###########################
 
-func AddPaymentToDb(taks *objects.Payment) {
-
+func AddPaymentToDb(user_id int, payment objects.Payment) bool {
+	new_payment := models.Payment{
+		UserId: user_id,
+		Name:   payment.Name,
+		Reason: payment.Reason,
+		Amount: payment.Amount,
+		Date:   payment.Date,
+	}
+	result := db.Create(&new_payment)
+	return result.Error == nil
 }
 
-func GetPaymentFromDb(taks *objects.Payment) {
+func GetPaymentFromDb(fund *objects.Payment) (bool, string) {
 
+	return true, "success"
 }
 
-func GetPaymentsFromDb(taks *objects.Payment) {
+func GetPaymentsFromDb(fund *objects.Payment) (bool, string) {
 
+	return true, "success"
 }
 
-func UpdatePaymentInDb(taks *objects.Payment) {
+func UpdatePaymentInDb(fund *objects.Payment) (bool, string) {
 
+	return true, "success"
 }
 
-func DeletePaymentFromDb(taks *objects.Payment) {
+func DeletePaymentFromDb(fund *objects.Payment) (bool, string) {
 
+	return true, "success"
 }
