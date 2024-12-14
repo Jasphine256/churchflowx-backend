@@ -40,21 +40,19 @@ func GetTask(ctx *fiber.Ctx) error {
 }
 
 func GetTasks(ctx *fiber.Ctx) error {
-	type User struct {
+	type CurrentUserId struct {
 		ID int
 	}
-	var current_user User
-	err := ctx.BodyParser(&current_user)
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
 	if err != nil {
-		log.Fatal(err)
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed to parse body", "data": map[string]string{}})
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, tasks := services.GetTasksFromDb(current_user.ID)
+	status, tasks := services.GetTasksFromDb(current_user_id.ID)
 	if !status {
-		ResponseHandler(ctx, 500, fiber.Map{"message": "failed to save to db", "data": map[string]string{}})
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
-
-	return ctx.Status(200).JSON(fiber.Map{"message": tasks})
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": tasks}})
 }
 
 func UpdateTask(ctx *fiber.Ctx) error {
@@ -91,7 +89,19 @@ func GetPlan(ctx *fiber.Ctx) error {
 }
 
 func GetPlans(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, plans := services.GetPlansFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": plans}})
 }
 
 func UpdatePlan(ctx *fiber.Ctx) error {
@@ -127,7 +137,19 @@ func GetProject(ctx *fiber.Ctx) error {
 }
 
 func GetProjects(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, projects := services.GetProjectsFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": projects}})
 }
 
 func UpdateProject(ctx *fiber.Ctx) error {

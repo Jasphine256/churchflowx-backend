@@ -34,7 +34,19 @@ func GetMinister(ctx *fiber.Ctx) error {
 }
 
 func GetMinisters(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, ministers := services.GetMinistersFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": ministers}})
 }
 
 func UpdateMinister(ctx *fiber.Ctx) error {
@@ -70,7 +82,19 @@ func GetMember(ctx *fiber.Ctx) error {
 }
 
 func GetMembers(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, members := services.GetMembersFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": members}})
 }
 
 func UpdateMember(ctx *fiber.Ctx) error {
@@ -106,7 +130,19 @@ func GetVisitor(ctx *fiber.Ctx) error {
 }
 
 func GetVisitors(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, visitors := services.GetVisitorsFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": visitors}})
 }
 
 func UpdateVisitor(ctx *fiber.Ctx) error {
@@ -142,7 +178,19 @@ func GetPastor(ctx *fiber.Ctx) error {
 }
 
 func GetPastors(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, pastors := services.GetPastorsFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": pastors}})
 }
 
 func UpdatePastor(ctx *fiber.Ctx) error {
@@ -169,7 +217,19 @@ func CreateAdmin(ctx *fiber.Ctx) error {
 }
 
 func GetAdmin(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserEmail struct {
+		Email string
+	}
+	var current_user_email CurrentUserEmail
+	err := ctx.BodyParser(&current_user_email)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, tasks := services.GetAdminFromDb(current_user_email.Email)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": tasks}})
 }
 
 func GetPAdmin(ctx *fiber.Ctx) error {

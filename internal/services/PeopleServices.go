@@ -41,9 +41,10 @@ func GetMemberFromDb(taks *objects.Member) (bool, string) {
 	return true, "success"
 }
 
-func GetMembersFromDb(taks *objects.Member) (bool, string) {
-
-	return true, "success"
+func GetMembersFromDb(user_id int) (bool, []models.Member) {
+	var members []models.Member
+	result := db.Where("user_id = ?", user_id).Find(&members)
+	return result.Error == nil, members
 }
 
 func UpdateMemberInDb(taks *objects.Member) (bool, string) {
@@ -94,9 +95,10 @@ func GetMinisterFromDb(taks *objects.Minister) (bool, string) {
 	return true, "success"
 }
 
-func GetMinistersFromDb(taks *objects.Minister) (bool, string) {
-
-	return true, "success"
+func GetMinistersFromDb(user_id int) (bool, []models.Minister) {
+	var ministers []models.Minister
+	result := db.Where("user_id = ?", user_id).Find(&ministers)
+	return result.Error == nil, ministers
 }
 
 func UpdateMinisterInDb(taks *objects.Minister) (bool, string) {
@@ -127,9 +129,10 @@ func GetVisitorFromDb(taks *objects.Visitor) (bool, string) {
 	return true, "success"
 }
 
-func GetVisitorsFromDb(taks *objects.Visitor) (bool, string) {
-
-	return true, "success"
+func GetVisitorsFromDb(user_id int) (bool, []models.Visitor) {
+	var visitors []models.Visitor
+	result := db.Where("user_id = ?", user_id).Find(&visitors)
+	return result.Error == nil, visitors
 }
 
 func UpdateVisitorInDb(taks *objects.Visitor) (bool, string) {
@@ -180,9 +183,10 @@ func GetPastorFromDb(taks *objects.Pastor) (bool, string) {
 	return true, "success"
 }
 
-func GetPastorsFromDb(taks *objects.Pastor) (bool, string) {
-
-	return true, "success"
+func GetPastorsFromDb(user_id int) (bool, []models.Pastor) {
+	var pastors []models.Pastor
+	result := db.Where("user_id = ?", user_id).Find(&pastors)
+	return result.Error == nil, pastors
 }
 
 func UpdatePastorInDb(taks *objects.Pastor) (bool, string) {
@@ -207,12 +211,13 @@ func AddAdminToDb(user_admin *objects.Admin) bool {
 	return result.Error == nil
 }
 
-func GetAdminFromDb(user_admin *objects.Admin) bool {
-
-	return true
+func GetAdminFromDb(user_email string) (bool, []models.Admin) {
+	var admin []models.Admin
+	result := db.Where("email = ?", user_email).Find(&admin)
+	return result.Error == nil, admin
 }
 
-func GetPAdminFromDb(user_admin *objects.Admin) bool {
+func GetAdminsFromDb(user_admin *objects.Admin) bool {
 
 	return true
 }

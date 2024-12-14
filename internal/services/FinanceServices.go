@@ -27,9 +27,10 @@ func GetFundFromDb(fund *objects.Task) (bool, string) {
 	return true, "success"
 }
 
-func GetFundsFromDb(fund *objects.Fund) (bool, string) {
-
-	return true, "success"
+func GetFundsFromDb(user_id int) (bool, []models.Fund) {
+	var funds []models.Fund
+	result := db.Where("user_id = ?", user_id).Find(&funds)
+	return result.Error == nil, funds
 }
 
 func UpdateFundInDb(fund *objects.Fund) (bool, string) {
@@ -61,9 +62,10 @@ func GetPaymentFromDb(fund *objects.Payment) (bool, string) {
 	return true, "success"
 }
 
-func GetPaymentsFromDb(fund *objects.Payment) (bool, string) {
-
-	return true, "success"
+func GetPaymentsFromDb(user_id int) (bool, []models.Payment) {
+	var payments []models.Payment
+	result := db.Where("user_id = ?", user_id).Find(&payments)
+	return result.Error == nil, payments
 }
 
 func UpdatePaymentInDb(fund *objects.Payment) (bool, string) {

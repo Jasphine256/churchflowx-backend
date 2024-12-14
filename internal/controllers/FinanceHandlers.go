@@ -33,7 +33,19 @@ func GetFund(ctx *fiber.Ctx) error {
 }
 
 func GetFunds(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, funds := services.GetFundsFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": funds}})
 }
 
 func UpdateFund(ctx *fiber.Ctx) error {
@@ -69,7 +81,19 @@ func GetPayment(ctx *fiber.Ctx) error {
 }
 
 func GetPayments(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		ID int
+	}
+	var current_user_id CurrentUserId
+	err := ctx.BodyParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
+	}
+	status, payments := services.GetPaymentsFromDb(current_user_id.ID)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": payments}})
 }
 
 func UpdatePayment(ctx *fiber.Ctx) error {

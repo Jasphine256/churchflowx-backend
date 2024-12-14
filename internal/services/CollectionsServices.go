@@ -25,9 +25,10 @@ func GetTaskFromDb(task *objects.Task) (bool, string) {
 	return true, "success"
 }
 
-func GetTasksFromDb(user_id int) (bool, *models.Task) {
-	var new_task models.Task
-	return true, &new_task
+func GetTasksFromDb(user_id int) (bool, []models.Task) {
+	var tasks []models.Task
+	result := db.Where("user_id = ?", user_id).Find(&tasks)
+	return result.Error == nil, tasks
 }
 
 func UpdateTaskInDb(task *objects.Task) (bool, string) {
@@ -57,8 +58,10 @@ func GetPlanFromDb(plan *objects.Plan) (bool, string) {
 	return true, "success"
 }
 
-func GetPlansFromDb(plan *objects.Plan) (bool, string) {
-	return true, "success"
+func GetPlansFromDb(user_id int) (bool, []models.Plan) {
+	var plans []models.Plan
+	result := db.Where("user_id = ?", user_id).Find(&plans)
+	return result.Error == nil, plans
 }
 
 func UpdatePlanInDb(plan *objects.Plan) (bool, string) {
@@ -89,8 +92,10 @@ func GetProjectFromDb(project *objects.Project) (bool, string) {
 	return true, "success"
 }
 
-func GetProjectsFromDb(project *objects.Project) (bool, string) {
-	return true, "success"
+func GetProjectsFromDb(user_id int) (bool, []models.Project) {
+	var projects []models.Project
+	result := db.Where("user_id = ?", user_id).Find(&projects)
+	return result.Error == nil, projects
 }
 
 func UpdateProjectInDb(project *objects.Project) (bool, string) {
