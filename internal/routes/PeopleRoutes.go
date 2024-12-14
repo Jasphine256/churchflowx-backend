@@ -22,7 +22,7 @@ func SetupPeopleRoutes(app *fiber.App) {
 			return controllers.GetMinister(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreateMinister(c)
 		})
 
@@ -45,7 +45,7 @@ func SetupPeopleRoutes(app *fiber.App) {
 			return controllers.GetMember(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreateMember(c)
 		})
 
@@ -68,7 +68,7 @@ func SetupPeopleRoutes(app *fiber.App) {
 			return controllers.GetVisitor(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreateVisitor(c)
 		})
 
@@ -91,7 +91,7 @@ func SetupPeopleRoutes(app *fiber.App) {
 			return controllers.GetPastor(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreatePastor(c)
 		})
 

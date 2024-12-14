@@ -15,7 +15,7 @@ type Member struct {
 	Occupation     string `gorm:"size:50;not null"`
 	Where          string `gorm:"size:100;not null"`
 	MaritalStatus  string `gorm:"size:25;not null"`
-	Children       uint8  `gorm:"not null"`
+	Children       string `gorm:"ize:10;not null"`
 	Tel            string `gorm:"size:255;not null"`
 	Email          string `gorm:"size:255;not null"`
 	Father         string `gorm:"size:100;not null"`
@@ -43,7 +43,7 @@ type Minister struct {
 	Occupation     string `gorm:"size:50;not null"`
 	Where          string `gorm:"size:100;not null"`
 	MaritalStatus  string `gorm:"size:25;not null"`
-	Children       uint8  `gorm:"not null"`
+	Children       string `gorm:"size:10;not null"`
 	Tel            string `gorm:"size:255;not null"`
 	Email          string `gorm:"size:255;not null"`
 	Father         string `gorm:"size:100;not null"`
@@ -79,7 +79,7 @@ type Pastor struct {
 	Occupation     string `gorm:"size:50;not null"`
 	Where          string `gorm:"size:100;not null"`
 	MaritalStatus  string `gorm:"size:25;not null"`
-	Children       uint8  `gorm:"not null"`
+	Children       string `gorm:"size:10;not null"`
 	Tel            string `gorm:"size:255;not null"`
 	Email          string `gorm:"size:255;not null"`
 	Father         string `gorm:"size:100;not null"`

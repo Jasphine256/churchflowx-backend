@@ -24,5 +24,5 @@ func main() {
 	routes.SetupFinanceRoutes(app)
 	routes.SetupCollectionsRoutes(app)
 
-	app.Listen(":3210")
+	app.Listen(":3000")
 }

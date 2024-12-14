@@ -4,6 +4,7 @@ import (
 	"churchflowx/internal/objects"
 	"churchflowx/internal/services"
 	"log"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -11,7 +12,21 @@ import (
 // ############################# MINISTERS HANDLERS #############################
 
 func CreateMinister(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	user_id := ctx.Params("id")
+	int_id, err := strconv.Atoi(user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
+	}
+	var minister objects.Minister
+	err = ctx.BodyParser(&minister)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
+	}
+	success := services.AddMinisterToDb(int_id, &minister)
+	if !success {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ResponseHandler(ctx, 201, fiber.Map{"message": "created", "data": map[string]objects.Minister{"object": minister}})
 }
 
 func GetMinister(ctx *fiber.Ctx) error {
@@ -33,7 +48,21 @@ func DeleteMinister(ctx *fiber.Ctx) error {
 // ############################# MEMBER HANDLERS #############################
 
 func CreateMember(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	user_id := ctx.Params("id")
+	int_id, err := strconv.Atoi(user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
+	}
+	var member objects.Member
+	err = ctx.BodyParser(&member)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
+	}
+	success := services.AddMemberToDb(int_id, &member)
+	if !success {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ResponseHandler(ctx, 201, fiber.Map{"message": "created", "data": map[string]objects.Member{"object": member}})
 }
 
 func GetMember(ctx *fiber.Ctx) error {
@@ -55,7 +84,21 @@ func DeleteMember(ctx *fiber.Ctx) error {
 // ############################ VISITORS HANDLERS ###########################
 
 func CreateVisitor(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	user_id := ctx.Params("id")
+	int_id, err := strconv.Atoi(user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
+	}
+	var visitor objects.Visitor
+	err = ctx.BodyParser(&visitor)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
+	}
+	success := services.AddVisitorToDb(int_id, &visitor)
+	if !success {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ResponseHandler(ctx, 201, fiber.Map{"message": "created", "data": map[string]objects.Visitor{"object": visitor}})
 }
 
 func GetVisitor(ctx *fiber.Ctx) error {
@@ -77,7 +120,21 @@ func DeleteVisitor(ctx *fiber.Ctx) error {
 // ############################ PASTORS HANDLERS ###########################
 
 func CreatePastor(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	user_id := ctx.Params("id")
+	int_id, err := strconv.Atoi(user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
+	}
+	var pastor objects.Pastor
+	err = ctx.BodyParser(&pastor)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
+	}
+	success := services.AddPastorToDb(int_id, &pastor)
+	if !success {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ResponseHandler(ctx, 201, fiber.Map{"message": "created", "data": map[string]objects.Pastor{"object": pastor}})
 }
 
 func GetPastor(ctx *fiber.Ctx) error {
@@ -104,7 +161,6 @@ func CreateAdmin(ctx *fiber.Ctx) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	success := services.AddAdminToDb(&Admin)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "error", "data": map[string]string{}})

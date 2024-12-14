@@ -15,7 +15,7 @@ type Member struct {
 	Occupation     string
 	Where          string
 	MaritalStatus  string
-	Children       int
+	Children       string
 	Tel            string
 	Email          string
 	Father         string
@@ -43,7 +43,7 @@ type Minister struct {
 	Occupation     string
 	Where          string
 	MaritalStatus  string
-	Children       int
+	Children       string
 	Tel            string
 	Email          string
 	Father         string
@@ -77,7 +77,7 @@ type Pastor struct {
 	Occupation     string
 	Where          string
 	MaritalStatus  string
-	Children       int
+	Children       string
 	Tel            string
 	Email          string
 	Father         string
