@@ -3,6 +3,7 @@ package main
 import (
 	"churchflowx/config"
 	"churchflowx/internal/routes"
+	"log"
 
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
@@ -24,5 +25,10 @@ func main() {
 	routes.SetupFinanceRoutes(app)
 	routes.SetupCollectionsRoutes(app)
 
-	app.Listen(":3000")
+	port := config.GetEnv("PORT", "8080")
+
+	log.Printf("Starting server on port %s...\n", port)
+	if err := app.Listen(":" + port); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }

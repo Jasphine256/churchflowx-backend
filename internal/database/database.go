@@ -23,18 +23,18 @@ func InitialiseDB() *gorm.DB {
 
 	log.Println("Database connected!")
 
-	db.AutoMigrate(
-	// &models.Admin{},
-	// &models.Member{},
-	// &models.Minister{},
-	// &models.Pastor{},
-	// &models.Visitor{},
-	// &models.Task{},
-	// &models.Plan{},
-	// &models.Project{},
-	// &models.Fund{},
-	// &models.Payment{},
-	)
+	// db.AutoMigrate(
+	// 	&models.Admin{},
+	// 	&models.Member{},
+	// 	&models.Minister{},
+	// 	&models.Pastor{},
+	// 	&models.Visitor{},
+	// 	&models.Task{},
+	// 	&models.Plan{},
+	// 	&models.Project{},
+	// 	&models.Fund{},
+	// 	&models.Payment{},
+	// )
 
 	return db
 }
