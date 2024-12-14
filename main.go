@@ -7,6 +7,7 @@ import (
 
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -17,6 +18,12 @@ func main() {
 		JSONEncoder:   json.Marshal,   // specifying the json encoder better performance
 		JSONDecoder:   json.Unmarshal, // specifying the json decoder for better performance
 	})
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*", // Add your frontend domains here
+		AllowHeaders: "Content-Type",
+		AllowMethods: "GET, POST, PUT, DELETE",
+	}))
 
 	config.LoadEnv()
 	config.SetupAppConfig(app)
