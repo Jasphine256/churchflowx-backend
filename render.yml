@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: churchflowx-backend-v1f
+    env: go
+    buildCommand: go build main.go
+    startCommand: ./main
