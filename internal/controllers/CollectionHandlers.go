@@ -44,7 +44,7 @@ func GetTasks(ctx *fiber.Ctx) error {
 		ID int
 	}
 	var current_user_id CurrentUserId
-	err := ctx.BodyParser(&current_user_id)
+	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
@@ -93,7 +93,7 @@ func GetPlans(ctx *fiber.Ctx) error {
 		ID int
 	}
 	var current_user_id CurrentUserId
-	err := ctx.BodyParser(&current_user_id)
+	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
@@ -141,7 +141,7 @@ func GetProjects(ctx *fiber.Ctx) error {
 		ID int
 	}
 	var current_user_id CurrentUserId
-	err := ctx.BodyParser(&current_user_id)
+	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
