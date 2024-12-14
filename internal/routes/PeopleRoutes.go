@@ -106,7 +106,7 @@ func SetupPeopleRoutes(app *fiber.App) {
 
 	users.Route("/admins", func(api fiber.Router) {
 
-		api.Get("/:id", func(c *fiber.Ctx) error {
+		api.Get("/", func(c *fiber.Ctx) error {
 			return controllers.GetAdmin(c)
 		})
 
