@@ -5,7 +5,7 @@ type Payment struct {
 	UserId int    `gorm:"not null"`
 	Name   string `gorm:"size:255;not null"`
 	Reason string `gorm:"size:255;not null"`
-	Amount uint16 `gorm:"not null"`
+	Amount string `gorm:"size:50;not null"`
 	Date   string `gorm:"size:255;not null"`
 }
 
@@ -14,6 +14,6 @@ type Fund struct {
 	UserId int    `gorm:"not null"`
 	Name   string `gorm:"size:255;not null"`
 	Reason string `gorm:"size:255;not null"`
-	Amount uint16 `gorm:"not null"`
+	Amount string `gorm:"size:50;null"`
 	Date   string `gorm:"size:255;not null"`
 }

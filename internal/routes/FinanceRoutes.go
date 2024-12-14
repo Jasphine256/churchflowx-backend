@@ -22,7 +22,7 @@ func SetupFinanceRoutes(app *fiber.App) {
 			return controllers.GetFund(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreateFund(c)
 		})
 
@@ -45,7 +45,7 @@ func SetupFinanceRoutes(app *fiber.App) {
 			return controllers.GetPayment(c)
 		})
 
-		api.Post("/new", func(c *fiber.Ctx) error {
+		api.Post("/new/:id", func(c *fiber.Ctx) error {
 			return controllers.CreatePayment(c)
 		})
 

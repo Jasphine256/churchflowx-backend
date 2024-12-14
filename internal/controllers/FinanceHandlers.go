@@ -12,14 +12,14 @@ import (
 
 func CreateFund(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	var fund objects.Fund
-	err := ctx.BodyParser(fund)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields", "data": map[string]string{}})
-	}
 	final_id, err := strconv.Atoi(user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter", "data": map[string]string{}})
+	}
+	var fund objects.Fund
+	err = ctx.BodyParser(&fund)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields", "data": map[string]string{}})
 	}
 	success := services.AddFundToDb(final_id, fund)
 	if !success {
@@ -53,7 +53,7 @@ func CreatePayment(ctx *fiber.Ctx) error {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
 	}
 	var payment objects.Payment
-	err = ctx.BodyParser(payment)
+	err = ctx.BodyParser(&payment)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
