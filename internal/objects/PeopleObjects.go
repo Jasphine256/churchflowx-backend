@@ -54,6 +54,7 @@ type Minister struct {
 
 type Visitor struct {
 	GID          string
+	Name         string
 	Tel          string
 	Email        string
 	HomeDistrict string

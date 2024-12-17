@@ -57,6 +57,7 @@ type Minister struct {
 type Visitor struct {
 	ID           int    `gorm:"primaryKey"`
 	GID          string `gorm:"not null"`
+	Name         string `gorm:"size:100;not null"`
 	Tel          string `gorm:"size:100;not null"`
 	Email        string `gorm:"size:100;not null"`
 	HomeDistrict string `gorm:"size:25;not null"`
