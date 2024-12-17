@@ -22,7 +22,7 @@ func SetupCollectionsRoutes(app *fiber.App) {
 			return controllers.GetTask(c)
 		})
 
-		api.Post("/new/:id", func(c *fiber.Ctx) error {
+		api.Post("/new", func(c *fiber.Ctx) error {
 			return controllers.CreateTask(c)
 		})
 
@@ -45,7 +45,7 @@ func SetupCollectionsRoutes(app *fiber.App) {
 			return controllers.GetPlan(c)
 		})
 
-		api.Post("/new/:id", func(c *fiber.Ctx) error {
+		api.Post("/new", func(c *fiber.Ctx) error {
 			return controllers.CreatePlan(c)
 		})
 
@@ -68,7 +68,7 @@ func SetupCollectionsRoutes(app *fiber.App) {
 			return controllers.GetProject(c)
 		})
 
-		api.Post("/new/:id", func(c *fiber.Ctx) error {
+		api.Post("/new", func(c *fiber.Ctx) error {
 			return controllers.CreateProject(c)
 		})
 
