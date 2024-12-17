@@ -2,7 +2,7 @@ package database
 
 import (
 	"churchflowx/config"
-	// "churchflowx/internal/models"
+	"churchflowx/internal/models"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -23,18 +23,18 @@ func InitialiseDB() *gorm.DB {
 
 	log.Println("Database connected!")
 
-	// db.AutoMigrate(
-	// 	&models.Admin{},
-	// 	&models.Member{},
-	// 	&models.Minister{},
-	// 	&models.Pastor{},
-	// 	&models.Visitor{},
-	// 	&models.Task{},
-	// 	&models.Plan{},
-	// 	&models.Project{},
-	// 	&models.Fund{},
-	// 	&models.Payment{},
-	// )
+	db.AutoMigrate(
+		&models.Admin{},
+		&models.Member{},
+		&models.Minister{},
+		&models.Pastor{},
+		&models.Visitor{},
+		&models.Task{},
+		&models.Plan{},
+		&models.Project{},
+		&models.Fund{},
+		&models.Payment{},
+	)
 
 	return db
 }
