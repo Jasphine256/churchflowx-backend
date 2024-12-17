@@ -217,19 +217,19 @@ func CreateAdmin(ctx *fiber.Ctx) error {
 }
 
 func GetAdmin(ctx *fiber.Ctx) error {
-	type CurrentUserEmail struct {
-		Email string
+	type CurrentUserGid struct {
+		GID int
 	}
-	var current_user_email CurrentUserEmail
-	err := ctx.QueryParser(&current_user_email)
+	var current_user_gid CurrentUserGid
+	err := ctx.QueryParser(&current_user_gid)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, tasks := services.GetAdminFromDb(current_user_email.Email)
+	status, admins := services.GetAdminFromDb(current_user_gid.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
-	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": tasks}})
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": admins}})
 }
 
 func GetPAdmin(ctx *fiber.Ctx) error {

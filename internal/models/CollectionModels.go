@@ -2,7 +2,7 @@ package models
 
 type Task struct {
 	ID          int    `gorm:"primaryKey"`
-	UserId      int    `gorm:"not null"`
+	GID         int    `gorm:"not null"`
 	Title       string `gorm:"size:255;not null"`
 	Description string `gorm:"size:1000;not null"`
 	StartDate   string `gorm:"size:25;not null"`
@@ -12,7 +12,7 @@ type Task struct {
 
 type Plan struct {
 	ID          int    `gorm:"primaryKey"`
-	UserId      int    `gorm:"not null"`
+	GID         int    `gorm:"not null"`
 	Title       string `gorm:"size:255;not null"`
 	Description string `gorm:"size:1000;not null"`
 	Handler     string `gorm:"size:25;not null"`
@@ -22,7 +22,7 @@ type Plan struct {
 
 type Project struct {
 	ID          int    `gorm:"primaryKey"`
-	UserId      int    `gorm:"not null"`
+	GID         int    `gorm:"not null"`
 	Title       string `gorm:"size:255;not null"`
 	Description string `gorm:"size:1000;not null"`
 	Handler     string `gorm:"size:25;not null"`

@@ -12,7 +12,7 @@ var db = database.InitialiseDB()
 
 func AddFundToDb(user_id int, fund objects.Fund) bool {
 	new_fund := models.Fund{
-		UserId: user_id,
+		GID: user_id,
 		Name:   fund.Name,
 		Reason: fund.Reason,
 		Amount: fund.Amount,
@@ -27,9 +27,9 @@ func GetFundFromDb(fund *objects.Task) (bool, string) {
 	return true, "success"
 }
 
-func GetFundsFromDb(user_id int) (bool, []models.Fund) {
+func GetFundsFromDb(google_id int) (bool, []models.Fund) {
 	var funds []models.Fund
-	result := db.Where("user_id = ?", user_id).Find(&funds)
+	result := db.Where("gid = ?", google_id).Find(&funds)
 	return result.Error == nil, funds
 }
 
@@ -47,7 +47,7 @@ func DeleteFundFromDb(fund *objects.Fund) (bool, string) {
 
 func AddPaymentToDb(user_id int, payment objects.Payment) bool {
 	new_payment := models.Payment{
-		UserId: user_id,
+		GID: user_id,
 		Name:   payment.Name,
 		Reason: payment.Reason,
 		Amount: payment.Amount,
@@ -62,9 +62,9 @@ func GetPaymentFromDb(fund *objects.Payment) (bool, string) {
 	return true, "success"
 }
 
-func GetPaymentsFromDb(user_id int) (bool, []models.Payment) {
+func GetPaymentsFromDb(google_id int) (bool, []models.Payment) {
 	var payments []models.Payment
-	result := db.Where("user_id = ?", user_id).Find(&payments)
+	result := db.Where("gid = ?", google_id).Find(&payments)
 	return result.Error == nil, payments
 }
 

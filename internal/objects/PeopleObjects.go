@@ -89,6 +89,7 @@ type Pastor struct {
 }
 
 type Admin struct {
+	GID        int
 	Name       string
 	Email      string
 	ProfileImg string

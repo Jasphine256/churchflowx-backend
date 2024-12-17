@@ -90,14 +90,14 @@ func GetPlan(ctx *fiber.Ctx) error {
 
 func GetPlans(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID int
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, plans := services.GetPlansFromDb(current_user_id.ID)
+	status, plans := services.GetPlansFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}

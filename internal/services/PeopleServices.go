@@ -9,7 +9,7 @@ import (
 
 func AddMemberToDb(user_id int, member *objects.Member) bool {
 	new_member := models.Member{
-		UserId:         user_id,
+		GID:         user_id,
 		Date:           member.Date,
 		Name:           member.Name,
 		Dob:            member.Dob,
@@ -41,9 +41,9 @@ func GetMemberFromDb(taks *objects.Member) (bool, string) {
 	return true, "success"
 }
 
-func GetMembersFromDb(user_id int) (bool, []models.Member) {
+func GetMembersFromDb(google_id int) (bool, []models.Member) {
 	var members []models.Member
-	result := db.Where("user_id = ?", user_id).Find(&members)
+	result := db.Where("gid = ?", google_id).Find(&members)
 	return result.Error == nil, members
 }
 
@@ -61,7 +61,7 @@ func DeleteMemberFromDb(taks *objects.Member) (bool, string) {
 
 func AddMinisterToDb(user_id int, minister *objects.Minister) bool {
 	new_minister := models.Minister{
-		UserId:         user_id,
+		GID:         user_id,
 		Date:           minister.Date,
 		Name:           minister.Name,
 		Ministry:       minister.Ministry,
@@ -95,9 +95,9 @@ func GetMinisterFromDb(taks *objects.Minister) (bool, string) {
 	return true, "success"
 }
 
-func GetMinistersFromDb(user_id int) (bool, []models.Minister) {
+func GetMinistersFromDb(google_id int) (bool, []models.Minister) {
 	var ministers []models.Minister
-	result := db.Where("user_id = ?", user_id).Find(&ministers)
+	result := db.Where("gid = ?", google_id).Find(&ministers)
 	return result.Error == nil, ministers
 }
 
@@ -115,7 +115,7 @@ func DeleteMinisterFromDb(taks *objects.Minister) (bool, string) {
 
 func AddVisitorToDb(user_id int, visitor *objects.Visitor) bool {
 	new_visitor := models.Visitor{
-		UserId:       user_id,
+		GID:       user_id,
 		Tel:          visitor.Tel,
 		Email:        visitor.Email,
 		HomeDistrict: visitor.HomeDistrict,
@@ -129,9 +129,9 @@ func GetVisitorFromDb(taks *objects.Visitor) (bool, string) {
 	return true, "success"
 }
 
-func GetVisitorsFromDb(user_id int) (bool, []models.Visitor) {
+func GetVisitorsFromDb(google_id int) (bool, []models.Visitor) {
 	var visitors []models.Visitor
-	result := db.Where("user_id = ?", user_id).Find(&visitors)
+	result := db.Where("gid = ?", google_id).Find(&visitors)
 	return result.Error == nil, visitors
 }
 
@@ -149,7 +149,7 @@ func DeleteVisitorFromDb(taks *objects.Visitor) (bool, string) {
 
 func AddPastorToDb(user_id int, pastor *objects.Pastor) bool {
 	new_pastor := models.Pastor{
-		UserId:         user_id,
+		GID:         user_id,
 		Date:           pastor.Date,
 		Name:           pastor.Name,
 		Ministry:       pastor.Ministry,
@@ -183,9 +183,9 @@ func GetPastorFromDb(taks *objects.Pastor) (bool, string) {
 	return true, "success"
 }
 
-func GetPastorsFromDb(user_id int) (bool, []models.Pastor) {
+func GetPastorsFromDb(google_id int) (bool, []models.Pastor) {
 	var pastors []models.Pastor
-	result := db.Where("user_id = ?", user_id).Find(&pastors)
+	result := db.Where("gid = ?", google_id).Find(&pastors)
 	return result.Error == nil, pastors
 }
 
@@ -203,6 +203,7 @@ func DeletePastorFromDb(taks *objects.Pastor) (bool, string) {
 
 func AddAdminToDb(user_admin *objects.Admin) bool {
 	new_admin := models.Admin{
+		GID:        user_admin.GID,
 		Name:       user_admin.Name,
 		Email:      user_admin.Email,
 		ProfileImg: user_admin.ProfileImg,
@@ -211,9 +212,9 @@ func AddAdminToDb(user_admin *objects.Admin) bool {
 	return result.Error == nil
 }
 
-func GetAdminFromDb(user_email string) (bool, []models.Admin) {
+func GetAdminFromDb(google_id int) (bool, []models.Admin) {
 	var admin []models.Admin
-	result := db.Where("email = ?", user_email).Find(&admin)
+	result := db.Where("gid = ?", google_id).Find(&admin)
 	return result.Error == nil, admin
 }
 
