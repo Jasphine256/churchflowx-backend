@@ -2,7 +2,7 @@ package models
 
 type Payment struct {
 	ID     int    `gorm:"primaryKey"`
-	GID    int    `gorm:"not null"`
+	GID    string `gorm:"not null"`
 	Name   string `gorm:"size:255;not null"`
 	Reason string `gorm:"size:255;not null"`
 	Amount string `gorm:"size:50;not null"`
@@ -11,7 +11,7 @@ type Payment struct {
 
 type Fund struct {
 	ID     int    `gorm:"primaryKey"`
-	GID    int    `gorm:"not null"`
+	GID    string `gorm:"not null"`
 	Name   string `gorm:"size:255;not null"`
 	Reason string `gorm:"size:255;not null"`
 	Amount string `gorm:"size:50;null"`

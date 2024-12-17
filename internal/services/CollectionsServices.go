@@ -7,7 +7,7 @@ import (
 
 // ######################## TASKS SERVICES ###########################
 
-func AddTaskToDb(google_id int, user_task objects.Task) bool {
+func AddTaskToDb(google_id string, user_task objects.Task) bool {
 
 	new_task := models.Task{
 		GID:         google_id,
@@ -25,7 +25,7 @@ func GetTaskFromDb(task *objects.Task) (bool, string) {
 	return true, "success"
 }
 
-func GetTasksFromDb(google_id int) (bool, []models.Task) {
+func GetTasksFromDb(google_id string) (bool, []models.Task) {
 	var tasks []models.Task
 	result := db.Where("g_id = ?", google_id).Find(&tasks)
 	return result.Error == nil, tasks
@@ -41,7 +41,7 @@ func DeleteTaskFromDb(task *objects.Task) (bool, string) {
 
 // ######################## PLANS SERVICES ###########################
 
-func AddPlanToDb(google_id int, plan objects.Plan) bool {
+func AddPlanToDb(google_id string, plan objects.Plan) bool {
 	new_plan := models.Plan{
 		GID:         google_id,
 		Title:       plan.Title,
@@ -58,7 +58,7 @@ func GetPlanFromDb(plan *objects.Plan) (bool, string) {
 	return true, "success"
 }
 
-func GetPlansFromDb(google_id int) (bool, []models.Plan) {
+func GetPlansFromDb(google_id string) (bool, []models.Plan) {
 	var plans []models.Plan
 	result := db.Where("g_id = ?", google_id).Find(&plans)
 	return result.Error == nil, plans
@@ -74,7 +74,7 @@ func DeletePlanFromDb(plan *objects.Plan) (bool, string) {
 
 // ######################## PROJECTS SERVICES ###########################
 
-func AddProjectToDb(google_id int, project *objects.Project) bool {
+func AddProjectToDb(google_id string, project *objects.Project) bool {
 	new_project := models.Project{
 		GID:         google_id,
 		Title:       project.Title,
@@ -92,7 +92,7 @@ func GetProjectFromDb(project *objects.Project) (bool, string) {
 	return true, "success"
 }
 
-func GetProjectsFromDb(google_id int) (bool, []models.Project) {
+func GetProjectsFromDb(google_id string) (bool, []models.Project) {
 	var projects []models.Project
 	result := db.Where("g_id = ?", google_id).Find(&projects)
 	return result.Error == nil, projects

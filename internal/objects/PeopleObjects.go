@@ -1,8 +1,6 @@
 package objects
 
 type Member struct {
-	ID             int
-	UserID         int
 	Date           string
 	Name           string
 	Dob            string
@@ -27,8 +25,6 @@ type Member struct {
 }
 
 type Minister struct {
-	ID             int
-	UserID         int
 	Date           string
 	Name           string
 	Ministry       string
@@ -61,8 +57,6 @@ type Visitor struct {
 }
 
 type Pastor struct {
-	ID             int
-	UserID         int
 	Date           string
 	Name           string
 	Ministry       string
@@ -89,7 +83,7 @@ type Pastor struct {
 }
 
 type Admin struct {
-	GID        int
+	GID        string
 	Name       string
 	Email      string
 	ProfileImg string

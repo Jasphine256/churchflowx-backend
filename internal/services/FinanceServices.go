@@ -10,7 +10,7 @@ var db = database.InitialiseDB()
 
 // ######################## FUNDS SERVICES ###########################
 
-func AddFundToDb(google_id int, fund objects.Fund) bool {
+func AddFundToDb(google_id string, fund objects.Fund) bool {
 	new_fund := models.Fund{
 		GID: google_id,
 		Name:   fund.Name,
@@ -27,7 +27,7 @@ func GetFundFromDb(fund *objects.Task) (bool, string) {
 	return true, "success"
 }
 
-func GetFundsFromDb(google_id int) (bool, []models.Fund) {
+func GetFundsFromDb(google_id string) (bool, []models.Fund) {
 	var funds []models.Fund
 	result := db.Where("g_id = ?", google_id).Find(&funds)
 	return result.Error == nil, funds
@@ -45,7 +45,7 @@ func DeleteFundFromDb(fund *objects.Fund) (bool, string) {
 
 // ######################## PAYMENTS SERVICES ###########################
 
-func AddPaymentToDb(google_id int, payment objects.Payment) bool {
+func AddPaymentToDb(google_id string, payment objects.Payment) bool {
 	new_payment := models.Payment{
 		GID: google_id,
 		Name:   payment.Name,
@@ -62,7 +62,7 @@ func GetPaymentFromDb(fund *objects.Payment) (bool, string) {
 	return true, "success"
 }
 
-func GetPaymentsFromDb(google_id int) (bool, []models.Payment) {
+func GetPaymentsFromDb(google_id string) (bool, []models.Payment) {
 	var payments []models.Payment
 	result := db.Where("g_id = ?", google_id).Find(&payments)
 	return result.Error == nil, payments

@@ -3,7 +3,6 @@ package controllers
 import (
 	"churchflowx/internal/objects"
 	"churchflowx/internal/services"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -12,16 +11,12 @@ import (
 
 func CreateFund(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	final_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter", "data": map[string]string{}})
-	}
 	var fund objects.Fund
-	err = ctx.BodyParser(&fund)
+	err := ctx.BodyParser(&fund)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields", "data": map[string]string{}})
 	}
-	success := services.AddFundToDb(final_id, fund)
+	success := services.AddFundToDb(user_id, fund)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -34,14 +29,14 @@ func GetFund(ctx *fiber.Ctx) error {
 
 func GetFunds(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, funds := services.GetFundsFromDb(current_user_id.ID)
+	status, funds := services.GetFundsFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -60,16 +55,12 @@ func DeleteFund(ctx *fiber.Ctx) error {
 
 func CreatePayment(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	int_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
-	}
 	var payment objects.Payment
-	err = ctx.BodyParser(&payment)
+	err := ctx.BodyParser(&payment)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddPaymentToDb(int_id, payment)
+	success := services.AddPaymentToDb(user_id, payment)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -82,14 +73,14 @@ func GetPayment(ctx *fiber.Ctx) error {
 
 func GetPayments(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, payments := services.GetPaymentsFromDb(current_user_id.ID)
+	status, payments := services.GetPaymentsFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}

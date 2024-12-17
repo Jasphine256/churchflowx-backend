@@ -2,7 +2,7 @@ package models
 
 type Member struct {
 	ID             int    `gorm:"primaryKey"`
-	GID            int    `gorm:"not null"`
+	GID            string `gorm:"not null"`
 	Date           string `gorm:"size:25;not null"`
 	Name           string `gorm:"size:100;not null"`
 	Dob            string `gorm:"size:25;not null"`
@@ -28,7 +28,7 @@ type Member struct {
 
 type Minister struct {
 	ID             int    `gorm:"primaryKey"`
-	GID            int    `gorm:"not null"`
+	GID            string `gorm:"not null"`
 	Date           string `gorm:"size:25;not null"`
 	Name           string `gorm:"size:100;not null"`
 	Ministry       string `gorm:"size:100;not null"`
@@ -56,7 +56,7 @@ type Minister struct {
 
 type Visitor struct {
 	ID           int    `gorm:"primaryKey"`
-	GID          int    `gorm:"not null"`
+	GID          string `gorm:"not null"`
 	Tel          string `gorm:"size:100;not null"`
 	Email        string `gorm:"size:100;not null"`
 	HomeDistrict string `gorm:"size:25;not null"`
@@ -64,7 +64,7 @@ type Visitor struct {
 
 type Pastor struct {
 	ID             int    `gorm:"primaryKey"`
-	GID            int    `gorm:"not null"`
+	GID            string `gorm:"not null"`
 	Date           string `gorm:"size:25;not null"`
 	Name           string `gorm:"size:100;not null"`
 	Ministry       string `gorm:"size:100;not null"`
@@ -91,7 +91,7 @@ type Pastor struct {
 }
 
 type Admin struct {
-	GID        int        `gorm:"primaryKey"`
+	GID        string     `gorm:"primaryKey"`
 	Name       string     `gorm:"size:100;not null"`
 	Email      string     `gorm:"size:100;not null"`
 	ProfileImg string     `gorm:"size:255;not null"`

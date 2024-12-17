@@ -4,7 +4,6 @@ import (
 	"churchflowx/internal/objects"
 	"churchflowx/internal/services"
 	"log"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,16 +12,12 @@ import (
 
 func CreateMinister(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	int_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
-	}
 	var minister objects.Minister
-	err = ctx.BodyParser(&minister)
+	err := ctx.BodyParser(&minister)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddMinisterToDb(int_id, &minister)
+	success := services.AddMinisterToDb(user_id, &minister)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -35,14 +30,14 @@ func GetMinister(ctx *fiber.Ctx) error {
 
 func GetMinisters(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, ministers := services.GetMinistersFromDb(current_user_id.ID)
+	status, ministers := services.GetMinistersFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -61,16 +56,12 @@ func DeleteMinister(ctx *fiber.Ctx) error {
 
 func CreateMember(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	int_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
-	}
 	var member objects.Member
-	err = ctx.BodyParser(&member)
+	err := ctx.BodyParser(&member)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddMemberToDb(int_id, &member)
+	success := services.AddMemberToDb(user_id, &member)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -83,14 +74,14 @@ func GetMember(ctx *fiber.Ctx) error {
 
 func GetMembers(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, members := services.GetMembersFromDb(current_user_id.ID)
+	status, members := services.GetMembersFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -109,16 +100,12 @@ func DeleteMember(ctx *fiber.Ctx) error {
 
 func CreateVisitor(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	int_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
-	}
 	var visitor objects.Visitor
-	err = ctx.BodyParser(&visitor)
+	err := ctx.BodyParser(&visitor)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddVisitorToDb(int_id, &visitor)
+	success := services.AddVisitorToDb(user_id, &visitor)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -131,14 +118,14 @@ func GetVisitor(ctx *fiber.Ctx) error {
 
 func GetVisitors(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, visitors := services.GetVisitorsFromDb(current_user_id.ID)
+	status, visitors := services.GetVisitorsFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -157,16 +144,12 @@ func DeleteVisitor(ctx *fiber.Ctx) error {
 
 func CreatePastor(ctx *fiber.Ctx) error {
 	user_id := ctx.Params("id")
-	int_id, err := strconv.Atoi(user_id)
-	if err != nil {
-		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid id parameter supplied", "data": map[string]string{}})
-	}
 	var pastor objects.Pastor
-	err = ctx.BodyParser(&pastor)
+	err := ctx.BodyParser(&pastor)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddPastorToDb(int_id, &pastor)
+	success := services.AddPastorToDb(user_id, &pastor)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -179,14 +162,14 @@ func GetPastor(ctx *fiber.Ctx) error {
 
 func GetPastors(ctx *fiber.Ctx) error {
 	type CurrentUserId struct {
-		ID int
+		GID string
 	}
 	var current_user_id CurrentUserId
 	err := ctx.QueryParser(&current_user_id)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	status, pastors := services.GetPastorsFromDb(current_user_id.ID)
+	status, pastors := services.GetPastorsFromDb(current_user_id.GID)
 	if !status {
 		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -218,7 +201,7 @@ func CreateAdmin(ctx *fiber.Ctx) error {
 
 func GetAdmin(ctx *fiber.Ctx) error {
 	type CurrentUserGid struct {
-		GID int
+		GID string
 	}
 	var current_user_gid CurrentUserGid
 	err := ctx.QueryParser(&current_user_gid)
