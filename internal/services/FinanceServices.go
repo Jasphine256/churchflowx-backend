@@ -10,9 +10,9 @@ var db = database.InitialiseDB()
 
 // ######################## FUNDS SERVICES ###########################
 
-func AddFundToDb(google_id string, fund objects.Fund) bool {
+func AddFundToDb(fund objects.Fund) bool {
 	new_fund := models.Fund{
-		GID: google_id,
+		GID:    fund.GID,
 		Name:   fund.Name,
 		Reason: fund.Reason,
 		Amount: fund.Amount,
@@ -45,9 +45,9 @@ func DeleteFundFromDb(fund *objects.Fund) (bool, string) {
 
 // ######################## PAYMENTS SERVICES ###########################
 
-func AddPaymentToDb(google_id string, payment objects.Payment) bool {
+func AddPaymentToDb(payment objects.Payment) bool {
 	new_payment := models.Payment{
-		GID: google_id,
+		GID:    payment.GID,
 		Name:   payment.Name,
 		Reason: payment.Reason,
 		Amount: payment.Amount,

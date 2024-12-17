@@ -1,6 +1,7 @@
 package objects
 
 type Member struct {
+	GID            string
 	Date           string
 	Name           string
 	Dob            string
@@ -25,6 +26,7 @@ type Member struct {
 }
 
 type Minister struct {
+	GID            string
 	Date           string
 	Name           string
 	Ministry       string
@@ -51,12 +53,14 @@ type Minister struct {
 }
 
 type Visitor struct {
+	GID          string
 	Tel          string
 	Email        string
 	HomeDistrict string
 }
 
 type Pastor struct {
+	GID            string
 	Date           string
 	Name           string
 	Ministry       string

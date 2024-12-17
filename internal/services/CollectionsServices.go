@@ -7,10 +7,10 @@ import (
 
 // ######################## TASKS SERVICES ###########################
 
-func AddTaskToDb(google_id string, user_task objects.Task) bool {
+func AddTaskToDb(user_task *objects.Task) bool {
 
 	new_task := models.Task{
-		GID:         google_id,
+		GID:         user_task.GID,
 		Title:       user_task.Title,
 		Description: user_task.Description,
 		StartDate:   user_task.StartDate,
@@ -41,9 +41,9 @@ func DeleteTaskFromDb(task *objects.Task) (bool, string) {
 
 // ######################## PLANS SERVICES ###########################
 
-func AddPlanToDb(google_id string, plan objects.Plan) bool {
+func AddPlanToDb(plan *objects.Plan) bool {
 	new_plan := models.Plan{
-		GID:         google_id,
+		GID:         plan.GID,
 		Title:       plan.Title,
 		Description: plan.Description,
 		Handler:     plan.Handler,
@@ -74,9 +74,9 @@ func DeletePlanFromDb(plan *objects.Plan) (bool, string) {
 
 // ######################## PROJECTS SERVICES ###########################
 
-func AddProjectToDb(google_id string, project *objects.Project) bool {
+func AddProjectToDb(project *objects.Project) bool {
 	new_project := models.Project{
-		GID:         google_id,
+		GID:         project.GID,
 		Title:       project.Title,
 		Description: project.Description,
 		Handler:     project.Description,

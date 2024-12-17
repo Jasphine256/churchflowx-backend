@@ -1,6 +1,7 @@
 package objects
 
 type Task struct {
+	GID         string
 	Title       string
 	Description string
 	StartDate   string
@@ -9,6 +10,7 @@ type Task struct {
 }
 
 type Plan struct {
+	GID         string
 	Title       string
 	Description string
 	Handler     string
@@ -17,6 +19,7 @@ type Plan struct {
 }
 
 type Project struct {
+	GID         string
 	Title       string
 	Description string
 	Handler     string

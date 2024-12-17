@@ -10,13 +10,12 @@ import (
 // ############################# FUNDS HANDLERS #############################
 
 func CreateFund(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var fund objects.Fund
 	err := ctx.BodyParser(&fund)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields", "data": map[string]string{}})
 	}
-	success := services.AddFundToDb(user_id, fund)
+	success := services.AddFundToDb(fund)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -54,13 +53,12 @@ func DeleteFund(ctx *fiber.Ctx) error {
 // ############################# PAYMENTS HANDLERS #############################
 
 func CreatePayment(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var payment objects.Payment
 	err := ctx.BodyParser(&payment)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddPaymentToDb(user_id, payment)
+	success := services.AddPaymentToDb(payment)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}

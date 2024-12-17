@@ -16,14 +16,13 @@ func ResponseHandler(ctx *fiber.Ctx, status int, mapped_data fiber.Map) error {
 
 func CreateTask(ctx *fiber.Ctx) error {
 
-	user_id := ctx.Params("id")
 	var new_task objects.Task
 	err := ctx.BodyParser(&new_task)
 	if err != nil {
 		log.Fatal(err)
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed to parse body", "data": map[string]string{}})
 	}
-	success := services.AddTaskToDb(user_id, new_task)
+	success := services.AddTaskToDb(&new_task)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed to add task", "data": map[string]string{}})
 	}
@@ -61,14 +60,13 @@ func DeleteTask(ctx *fiber.Ctx) error {
 // ############################# PLANS HANDLERS #############################
 
 func CreatePlan(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var plan objects.Plan
 	err := ctx.BodyParser(&plan)
 	if err != nil {
 		log.Fatal(err)
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields passed", "data": map[string]string{}})
 	}
-	success := services.AddPlanToDb(user_id, plan)
+	success := services.AddPlanToDb(&plan)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -106,13 +104,12 @@ func DeletePlan(ctx *fiber.Ctx) error {
 // ############################ PROJECTS HANDLERS ###########################
 
 func CreateProject(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var project objects.Project
 	err := ctx.BodyParser(&project)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied ", "data": map[string]string{}})
 	}
-	success := services.AddProjectToDb(user_id, &project)
+	success := services.AddProjectToDb(&project)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}

@@ -7,9 +7,9 @@ import (
 
 // ######################## MEMBERS SERVICES ###########################
 
-func AddMemberToDb(google_id string, member *objects.Member) bool {
+func AddMemberToDb(member *objects.Member) bool {
 	new_member := models.Member{
-		GID:            google_id,
+		GID:            member.GID,
 		Date:           member.Date,
 		Name:           member.Name,
 		Dob:            member.Dob,
@@ -59,9 +59,9 @@ func DeleteMemberFromDb(taks *objects.Member) (bool, string) {
 
 // ######################## MINISTERS SERVICES ###########################
 
-func AddMinisterToDb(google_id string, minister *objects.Minister) bool {
+func AddMinisterToDb(minister *objects.Minister) bool {
 	new_minister := models.Minister{
-		GID:            google_id,
+		GID:            minister.GID,
 		Date:           minister.Date,
 		Name:           minister.Name,
 		Ministry:       minister.Ministry,
@@ -113,9 +113,9 @@ func DeleteMinisterFromDb(taks *objects.Minister) (bool, string) {
 
 // ######################## VISITORS SERVICES ###########################
 
-func AddVisitorToDb(google_id string, visitor *objects.Visitor) bool {
+func AddVisitorToDb(visitor *objects.Visitor) bool {
 	new_visitor := models.Visitor{
-		GID:          google_id,
+		GID:          visitor.GID,
 		Tel:          visitor.Tel,
 		Email:        visitor.Email,
 		HomeDistrict: visitor.HomeDistrict,
@@ -147,9 +147,9 @@ func DeleteVisitorFromDb(taks *objects.Visitor) (bool, string) {
 
 // ######################## PASTORS SERVICES ###########################
 
-func AddPastorToDb(google_id string, pastor *objects.Pastor) bool {
+func AddPastorToDb(pastor *objects.Pastor) bool {
 	new_pastor := models.Pastor{
-		GID:            google_id,
+		GID:            pastor.GID,
 		Date:           pastor.Date,
 		Name:           pastor.Name,
 		Ministry:       pastor.Ministry,
@@ -178,7 +178,7 @@ func AddPastorToDb(google_id string, pastor *objects.Pastor) bool {
 	return result.Error == nil
 }
 
-func GetPastorFromDb(taks *objects.Pastor) (bool, string) {
+func GetPastorFromDb(pastor *objects.Pastor) (bool, string) {
 
 	return true, "success"
 }

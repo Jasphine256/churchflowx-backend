@@ -11,13 +11,12 @@ import (
 // ############################# MINISTERS HANDLERS #############################
 
 func CreateMinister(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var minister objects.Minister
 	err := ctx.BodyParser(&minister)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddMinisterToDb(user_id, &minister)
+	success := services.AddMinisterToDb(&minister)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -55,13 +54,12 @@ func DeleteMinister(ctx *fiber.Ctx) error {
 // ############################# MEMBER HANDLERS #############################
 
 func CreateMember(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var member objects.Member
 	err := ctx.BodyParser(&member)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddMemberToDb(user_id, &member)
+	success := services.AddMemberToDb(&member)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -99,13 +97,12 @@ func DeleteMember(ctx *fiber.Ctx) error {
 // ############################ VISITORS HANDLERS ###########################
 
 func CreateVisitor(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var visitor objects.Visitor
 	err := ctx.BodyParser(&visitor)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddVisitorToDb(user_id, &visitor)
+	success := services.AddVisitorToDb(&visitor)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
@@ -143,13 +140,12 @@ func DeleteVisitor(ctx *fiber.Ctx) error {
 // ############################ PASTORS HANDLERS ###########################
 
 func CreatePastor(ctx *fiber.Ctx) error {
-	user_id := ctx.Params("id")
 	var pastor objects.Pastor
 	err := ctx.BodyParser(&pastor)
 	if err != nil {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid body fields supplied", "data": map[string]string{}})
 	}
-	success := services.AddPastorToDb(user_id, &pastor)
+	success := services.AddPastorToDb(&pastor)
 	if !success {
 		return ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
 	}
