@@ -116,6 +116,7 @@ func DeleteMinisterFromDb(taks *objects.Minister) (bool, string) {
 func AddVisitorToDb(visitor *objects.Visitor) bool {
 	new_visitor := models.Visitor{
 		GID:          visitor.GID,
+		Name:         visitor.Name,
 		Tel:          visitor.Tel,
 		Email:        visitor.Email,
 		HomeDistrict: visitor.HomeDistrict,
