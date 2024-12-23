@@ -32,7 +32,7 @@ func main() {
 	routes.SetupFinanceRoutes(app)
 	routes.SetupCollectionsRoutes(app)
 
-	port := config.GetEnv("PORT", "8080")
+	port := "8000"
 
 	log.Printf("Starting server on port %s...\n", port)
 	if err := app.Listen(":" + port); err != nil {
