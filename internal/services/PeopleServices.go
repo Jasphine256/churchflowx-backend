@@ -36,9 +36,10 @@ func AddMemberToDb(member *objects.Member) bool {
 	return result.Error == nil
 }
 
-func GetMemberFromDb(taks *objects.Member) (bool, string) {
-
-	return true, "success"
+func GetMemberFromDb(current_user_id, member_id string) (bool, models.Member) {
+	var member models.Member
+	result := db.Where("g_id = ? AND id = ?",current_user_id, member_id ).Find(&member)
+	return result.Error == nil, member
 }
 
 func GetMembersFromDb(google_id string) (bool, []models.Member) {
@@ -90,9 +91,10 @@ func AddMinisterToDb(minister *objects.Minister) bool {
 	return result.Error == nil
 }
 
-func GetMinisterFromDb(taks *objects.Minister) (bool, string) {
-
-	return true, "success"
+func GetMinisterFromDb(current_user_id, minister_id string) (bool, models.Minister) {
+	var minister models.Minister
+	result := db.Where("g_id = ? AND id = ?",current_user_id, minister_id ).Find(&minister)
+	return result.Error == nil, minister
 }
 
 func GetMinistersFromDb(google_id string) (bool, []models.Minister) {
@@ -125,9 +127,10 @@ func AddVisitorToDb(visitor *objects.Visitor) bool {
 	return result.Error == nil
 }
 
-func GetVisitorFromDb(taks *objects.Visitor) (bool, string) {
-
-	return true, "success"
+func GetVisitorFromDb(current_user_id, visitor_id string) (bool, models.Visitor) {
+	var visitor models.Visitor
+	result := db.Where("g_id = ? AND id = ?",current_user_id, visitor_id ).Find(&visitor)
+	return result.Error == nil, visitor
 }
 
 func GetVisitorsFromDb(google_id string) (bool, []models.Visitor) {
@@ -179,9 +182,10 @@ func AddPastorToDb(pastor *objects.Pastor) bool {
 	return result.Error == nil
 }
 
-func GetPastorFromDb(pastor *objects.Pastor) (bool, string) {
-
-	return true, "success"
+func GetPastorFromDb(current_user_id, pastor_id string) (bool, models.Pastor) {
+	var pastor models.Pastor
+	result := db.Where("g_id = ? AND id = ?",current_user_id, pastor_id ).Find(&pastor)
+	return result.Error == nil, pastor
 }
 
 func GetPastorsFromDb(google_id string) (bool, []models.Pastor) {

@@ -24,7 +24,20 @@ func CreateMinister(ctx *fiber.Ctx) error {
 }
 
 func GetMinister(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		GID string
+	}
+	var current_user_id CurrentUserId
+	err := ctx.QueryParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid query fields passed", "data": map[string]string{}})
+	}
+	minister_id := ctx.Params("id")
+	status, minister := services.GetMinisterFromDb(current_user_id.GID, minister_id)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": minister}})
 }
 
 func GetMinisters(ctx *fiber.Ctx) error {
@@ -67,7 +80,20 @@ func CreateMember(ctx *fiber.Ctx) error {
 }
 
 func GetMember(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		GID string
+	}
+	var current_user_id CurrentUserId
+	err := ctx.QueryParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid query fields passed", "data": map[string]string{}})
+	}
+	member_id := ctx.Params("id")
+	status, member := services.GetMemberFromDb(current_user_id.GID, member_id)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": member}})
 }
 
 func GetMembers(ctx *fiber.Ctx) error {
@@ -110,7 +136,20 @@ func CreateVisitor(ctx *fiber.Ctx) error {
 }
 
 func GetVisitor(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		GID string
+	}
+	var current_user_id CurrentUserId
+	err := ctx.QueryParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid query fields passed", "data": map[string]string{}})
+	}
+	visitor_id := ctx.Params("id")
+	status, visitor := services.GetVisitorFromDb(current_user_id.GID, visitor_id)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": visitor}})
 }
 
 func GetVisitors(ctx *fiber.Ctx) error {
@@ -153,7 +192,20 @@ func CreatePastor(ctx *fiber.Ctx) error {
 }
 
 func GetPastor(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(fiber.Map{"message": "value"})
+	type CurrentUserId struct {
+		GID string
+	}
+	var current_user_id CurrentUserId
+	err := ctx.QueryParser(&current_user_id)
+	if err != nil {
+		return ResponseHandler(ctx, 500, fiber.Map{"message": "invalid query fields passed", "data": map[string]string{}})
+	}
+	pastor_id := ctx.Params("id")
+	status, pastor := services.GetPastorFromDb(current_user_id.GID, pastor_id)
+	if !status {
+		ResponseHandler(ctx, 500, fiber.Map{"message": "failed", "data": map[string]string{}})
+	}
+	return ctx.Status(200).JSON(fiber.Map{"message": "success", "data": fiber.Map{"objects": pastor}})
 }
 
 func GetPastors(ctx *fiber.Ctx) error {
